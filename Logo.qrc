@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/assets">
+        <file>assets/logobanner.png</file>
+    </qresource>
+</RCC>
