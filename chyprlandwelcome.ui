@@ -80,7 +80,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <property name="usesScrollButtons">
      <bool>false</bool>
@@ -478,7 +478,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Thank you for choosing to install Hyprland. Have fun!&lt;/p&gt;&lt;p&gt;Make sure to check out the wiki, it documents pretty much everything Hyprland has to offer in detail.&lt;/p&gt;&lt;p&gt;The Variables page will document all the toggleable options, other pages will document stuff like monitor configs, binds, execs, sourcing, etc.&lt;/p&gt;&lt;p&gt;By clicking &amp;quot;Finish&amp;quot; this window will not pop up ever again. If you click &amp;quot;exit&amp;quot;, it will pop up again next time you open Hyprland.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Thank you for choosing to install Hyprland. Have fun!&lt;/p&gt;&lt;p&gt;Make sure to check out the wiki, it documents pretty much everything Hyprland has to offer in detail.&lt;/p&gt;&lt;p&gt;The Variables page will document all the toggleable options, other pages will document stuff like monitor configs, binds, execs, sourcing, etc.&lt;/p&gt;&lt;p&gt;By clicking &amp;quot;Finish&amp;quot; this window will not pop up ever again. If you click &amp;quot;exit&amp;quot;, it will pop up again next time you open Hyprland.&lt;/p&gt;&lt;p&gt;To apply your autostarts and make sure everything is running correctly, restart Hyprland.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
