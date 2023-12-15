@@ -80,7 +80,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="usesScrollButtons">
      <bool>false</bool>
@@ -174,7 +174,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The first thing we'll need to do is get some packages installed that you absolutely need in order for your system to be working properly.&lt;/p&gt;&lt;p&gt;Apps with * are absolutely necessary. All other are &lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;highly&lt;/span&gt; recommended, as they provide core parts of a working environment.&lt;/p&gt;&lt;p&gt;You &lt;span style=&quot; font-style:italic;&quot;&gt;can &lt;/span&gt;proceed without any of those, but it's not advised. There is a possibility that this app is unable to detect some of your installed binaries. In that case, it's okay to ignore them.&lt;/p&gt;&lt;p&gt;Use the &amp;quot;launch terminal&amp;quot; button to launch a terminal. Supported terminals are kitty, alacritty, foot, wezterm, xterm. If none are installed, you'll need to exit hyprland and install one. Use SUPER+M to exit hyprland.&lt;br/&gt;&lt;br/&gt;Hover on the different components to see what options are accepted.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The first thing we'll need to do is get some packages installed that you absolutely need in order for your system to be working properly.&lt;/p&gt;&lt;p&gt;Apps with * are absolutely necessary. All other are &lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;highly&lt;/span&gt; recommended, as they provide core parts of a working environment.&lt;/p&gt;&lt;p&gt;You &lt;span style=&quot; font-style:italic;&quot;&gt;can &lt;/span&gt;proceed without any of those, but it's not advised. There is a possibility that this app is unable to detect some of your installed binaries. In that case, it's okay to ignore them.&lt;/p&gt;&lt;p&gt;Use the &amp;quot;launch terminal&amp;quot; button to launch a terminal. Supported terminals are kitty, alacritty, foot, wezterm, konsole, gnome-terminal, xterm. If none are installed, you'll need to exit hyprland and install one. Use SUPER+M to exit hyprland.&lt;br/&gt;&lt;br/&gt;Hover on the different components to see what options are accepted.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -193,7 +193,7 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: kitty, alacritty, wezterm, foot. Worth noting this is not a comprehensive list and Hyprland will work with any wayland-compatible terminal emulator, however this app will not automatically detect it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: kitty, alacritty, wezterm, foot, konsole, gnome-terminal. Worth noting this is not a comprehensive list and Hyprland will work with any wayland-compatible terminal emulator, however this app will not automatically detect it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Terminal&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

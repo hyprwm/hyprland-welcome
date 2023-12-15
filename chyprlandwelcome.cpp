@@ -64,7 +64,7 @@ void CHyprlandWelcome::startAppTimer() {
                                   (QLabel*)findByName("INSTALL_XDP")});
     appChecks.push_back(SAppCheck{{}, {"/usr/lib/polkit-kde-authentication-agent-1"}, "Authentication Agent", (QLabel*)findByName("INSTALL_AUTH")});
     appChecks.push_back(SAppCheck{{"qtwaylandscanner"}, {}, "QT Wayland Support", (QLabel*)findByName("INSTALL_QTW")});
-    appChecks.push_back(SAppCheck{{"kitty", "wezterm", "alacritty", "foot"}, {}, "Terminal", (QLabel*)findByName("INSTALL_TERM")});
+    appChecks.push_back(SAppCheck{{"kitty", "wezterm", "alacritty", "foot", "konsole", "gnome-terminal"}, {}, "Terminal", (QLabel*)findByName("INSTALL_TERM")});
     appChecks.push_back(SAppCheck{{"qt5ct", "qt6ct"}, {}, "QT Theming", (QLabel*)findByName("INSTALL_QTTHEME")});
 
     QTimer* timer = new QTimer(this);
@@ -163,12 +163,12 @@ CHyprlandWelcome::CHyprlandWelcome(QWidget* parent) : QMainWindow(parent), ui(ne
     const auto OPENTERMINAL = (QPushButton*)findByName("openTerminalButton");
     QObject::connect(OPENTERMINAL, &QPushButton::clicked, [TABS, this] {
         QProcess* term = new QProcess(this);
-        term->start("/bin/sh", QStringList{"-c", "kitty || alacritty || wezterm || foot || xterm"});
+        term->start("/bin/sh", QStringList{"-c", "kitty || alacritty || wezterm || foot || konsole || gnome-terminal || xterm"});
     });
     const auto OPENTERMINAL2 = (QPushButton*)findByName("openTerminalButton2");
     QObject::connect(OPENTERMINAL2, &QPushButton::clicked, [TABS, this] {
         QProcess* term = new QProcess(this);
-        term->start("/bin/sh", QStringList{"-c", "kitty || alacritty || wezterm || foot || xterm"});
+        term->start("/bin/sh", QStringList{"-c", "kitty || alacritty || wezterm || foot || konsole || gnome-terminal || xterm"});
     });
 
     const auto EXITDONTSHOW = (QPushButton*)findByName("dontShowAgain");
