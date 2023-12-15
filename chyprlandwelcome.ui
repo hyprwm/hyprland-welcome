@@ -80,7 +80,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="usesScrollButtons">
      <bool>false</bool>
@@ -108,9 +108,9 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>70</y>
-        <width>771</width>
+        <width>751</width>
         <height>211</height>
        </rect>
       </property>
@@ -167,9 +167,9 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>771</width>
+        <width>751</width>
         <height>161</height>
        </rect>
       </property>
@@ -399,9 +399,9 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>771</width>
+        <width>751</width>
         <height>241</height>
        </rect>
       </property>
@@ -471,9 +471,9 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>10</y>
-        <width>771</width>
+        <width>751</width>
         <height>241</height>
        </rect>
       </property>
