@@ -115,7 +115,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;We hope you enjoy your stay. In order to help you get accomodated to Hyprland in an easier manner, we prepared a little basic setup tutorial, just for you.&lt;/p&gt;&lt;p&gt;If you feel adventurous, or are an advanced user, you can click the &amp;quot;don't show again&amp;quot; button on the bottom. It will close this window and never show it again.&lt;/p&gt;&lt;p&gt;If you want to manually launch this app, just execute hyprland-welcome in your terminal.&lt;/p&gt;&lt;p&gt;Click the &amp;quot;next&amp;quot; button to proceed to the next step of our setup :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;We hope you enjoy your stay. In order to help you get accomodated to Hyprland in an easier manner, we prepared a little basic setup tutorial, just for you.&lt;/p&gt;&lt;p&gt;If you feel adventurous, or are an advanced user, you can click the &amp;quot;don't show again&amp;quot; button on the bottom. It will close this window and never show it again.&lt;/p&gt;&lt;p&gt;If you want to manually launch this app, just execute HyprlandWelcome in your terminal.&lt;/p&gt;&lt;p&gt;Click the &amp;quot;next&amp;quot; button to proceed to the next step of our setup :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
