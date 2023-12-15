@@ -4,23 +4,24 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class CHyprlandWelcome; }
+namespace Ui {
+    class CHyprlandWelcome;
+}
 QT_END_NAMESPACE
 
-class CHyprlandWelcome : public QMainWindow
-{
+class CHyprlandWelcome : public QMainWindow {
     Q_OBJECT
 
-public:
-    CHyprlandWelcome(QWidget *parent = nullptr);
+  public:
+    CHyprlandWelcome(QWidget* parent = nullptr);
     ~CHyprlandWelcome();
 
-private:
-    Ui::CHyprlandWelcome *ui;
+  private:
+    Ui::CHyprlandWelcome* ui;
 
-    void startAppTimer();
-    void exitDontShowAgain();
+    void                  startAppTimer();
+    void                  exitDontShowAgain();
 
-    int currentTab = 0;
+    int                   currentTab = 0;
 };
 #endif // CHYPRLANDWELCOME_H

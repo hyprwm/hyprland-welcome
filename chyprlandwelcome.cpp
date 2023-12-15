@@ -9,11 +9,8 @@
 #include <filesystem>
 
 QWidget* findByName(QString name) {
-    QList<QWidget*> widgets = QApplication::allWidgets();
-    QList<QWidget*>::iterator it = std::find_if(widgets.begin(), widgets.end(),
-                                                 [name](QWidget *widget) -> bool {
-                                                     return widget->objectName() == name;
-                                                 });
+    QList<QWidget*>           widgets = QApplication::allWidgets();
+    QList<QWidget*>::iterator it      = std::find_if(widgets.begin(), widgets.end(), [name](QWidget* widget) -> bool { return widget->objectName() == name; });
     return it == widgets.end() ? nullptr : *it;
 }
 
@@ -44,85 +41,34 @@ bool binExists(std::string path) {
 struct SAppCheck {
     std::vector<std::string> binaryNames;
     std::vector<std::string> binaryPaths;
-    std::string name;
-    QLabel* label = nullptr;
-    bool needsAll = false;
+    std::string              name;
+    QLabel*                  label    = nullptr;
+    bool                     needsAll = false;
 };
 
 std::vector<SAppCheck> appChecks;
 
+//
 void CHyprlandWelcome::startAppTimer() {
 
-    appChecks.push_back(SAppCheck{
-        {"waybar", "ags", "eww"},
-        {},
-        "Status Bar",
-        (QLabel*)findByName("INSTALL_BAR")
-    });
-    appChecks.push_back(SAppCheck{
-        {"dolphin", "thunar", "ranger"},
-        {},
-        "File Manager",
-        (QLabel*)findByName("INSTALL_FM")
-    });
-    appChecks.push_back(SAppCheck{
-        {"mako", "dunst"},
-        {},
-        "Notification Daemon",
-        (QLabel*)findByName("INSTALL_NOTIF")
-    });
-    appChecks.push_back(SAppCheck{
-        {"anyrun", "fuzzel", "wofi", "tofi"},
-        {},
-        "App Launcher",
-        (QLabel*)findByName("INSTALL_LAUNCHER")
-    });
-    appChecks.push_back(SAppCheck{
-        {"hyprpaper", "swaybg", "swww"},
-        {},
-        "Wallpaper Utility",
-        (QLabel*)findByName("INSTALL_WALLPAPER")
-    });
-    appChecks.push_back(SAppCheck{
-        {"pipewire", "wireplumber"},
-        {},
-        "Pipewire*",
-        (QLabel*)findByName("INSTALL_PW"),
-        true
-    });
-    appChecks.push_back(SAppCheck{
-        {"xdg-desktop-portal", "xdg-desktop-portal-hyprland", "xdg-desktop-portal-gtk"},
-        {"/usr/lib/xdg-desktop-portal", "/usr/lib/xdg-desktop-portal-hyprland", "/usr/lib/xdg-desktop-portal-gtk", "/usr/libexec/xdg-desktop-portal", "/usr/libexec/xdg-desktop-portal-hyprland", "/usr/libexec/xdg-desktop-portal-gtk"},
-        "XDG Desktop Portal*",
-        (QLabel*)findByName("INSTALL_XDP")
-    });
-    appChecks.push_back(SAppCheck{
-        {},
-        {"/usr/lib/polkit-kde-authentication-agent-1"},
-        "Authentication Agent",
-        (QLabel*)findByName("INSTALL_AUTH")
-    });
-    appChecks.push_back(SAppCheck{
-        {"qtwaylandscanner"},
-        {},
-        "QT Wayland Support",
-        (QLabel*)findByName("INSTALL_QTW")
-    });
-    appChecks.push_back(SAppCheck{
-        {"kitty", "wezterm", "alacritty", "foot"},
-        {},
-        "Terminal",
-        (QLabel*)findByName("INSTALL_TERM")
-    });
-    appChecks.push_back(SAppCheck{
-        {"qt5ct", "qt6ct"},
-        {},
-        "QT Theming",
-        (QLabel*)findByName("INSTALL_QTTHEME")
-    });
+    appChecks.push_back(SAppCheck{{"waybar", "ags", "eww"}, {}, "Status Bar", (QLabel*)findByName("INSTALL_BAR")});
+    appChecks.push_back(SAppCheck{{"dolphin", "thunar", "ranger"}, {}, "File Manager", (QLabel*)findByName("INSTALL_FM")});
+    appChecks.push_back(SAppCheck{{"mako", "dunst"}, {}, "Notification Daemon", (QLabel*)findByName("INSTALL_NOTIF")});
+    appChecks.push_back(SAppCheck{{"anyrun", "fuzzel", "wofi", "tofi"}, {}, "App Launcher", (QLabel*)findByName("INSTALL_LAUNCHER")});
+    appChecks.push_back(SAppCheck{{"hyprpaper", "swaybg", "swww"}, {}, "Wallpaper Utility", (QLabel*)findByName("INSTALL_WALLPAPER")});
+    appChecks.push_back(SAppCheck{{"pipewire", "wireplumber"}, {}, "Pipewire*", (QLabel*)findByName("INSTALL_PW"), true});
+    appChecks.push_back(SAppCheck{{"xdg-desktop-portal", "xdg-desktop-portal-hyprland", "xdg-desktop-portal-gtk"},
+                                  {"/usr/lib/xdg-desktop-portal", "/usr/lib/xdg-desktop-portal-hyprland", "/usr/lib/xdg-desktop-portal-gtk", "/usr/libexec/xdg-desktop-portal",
+                                   "/usr/libexec/xdg-desktop-portal-hyprland", "/usr/libexec/xdg-desktop-portal-gtk"},
+                                  "XDG Desktop Portal*",
+                                  (QLabel*)findByName("INSTALL_XDP")});
+    appChecks.push_back(SAppCheck{{}, {"/usr/lib/polkit-kde-authentication-agent-1"}, "Authentication Agent", (QLabel*)findByName("INSTALL_AUTH")});
+    appChecks.push_back(SAppCheck{{"qtwaylandscanner"}, {}, "QT Wayland Support", (QLabel*)findByName("INSTALL_QTW")});
+    appChecks.push_back(SAppCheck{{"kitty", "wezterm", "alacritty", "foot"}, {}, "Terminal", (QLabel*)findByName("INSTALL_TERM")});
+    appChecks.push_back(SAppCheck{{"qt5ct", "qt6ct"}, {}, "QT Theming", (QLabel*)findByName("INSTALL_QTTHEME")});
 
     QTimer* timer = new QTimer(this);
-    QObject::connect(timer, &QTimer::timeout, this, [this] () {
+    QObject::connect(timer, &QTimer::timeout, this, [this]() {
         if (this->currentTab != 1)
             return;
 
@@ -181,36 +127,20 @@ void CHyprlandWelcome::exitDontShowAgain() {
     QApplication::exit(0);
 }
 
-CHyprlandWelcome::CHyprlandWelcome(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::CHyprlandWelcome)
-{
-    //setAttribute(Qt::WA_OpaquePaintEvent, false);
-    //setAttribute(Qt::WA_NoSystemBackground, true);
-    //setAttribute(Qt::WA_TranslucentBackground, true);
+CHyprlandWelcome::CHyprlandWelcome(QWidget* parent) : QMainWindow(parent), ui(new Ui::CHyprlandWelcome) {
 
     ui->setupUi(this);
 
-    // setStyleSheet("background: rgba(22, 22, 22, 170);");
-
     const auto GHBUTTON = (QPushButton*)findByName("githubButton");
-    QObject::connect(GHBUTTON, &QPushButton::clicked, [] {
-        QDesktopServices::openUrl(QString{"https://github.com/hyprwm/hyprland"});
-    });
+    QObject::connect(GHBUTTON, &QPushButton::clicked, [] { QDesktopServices::openUrl(QString{"https://github.com/hyprwm/hyprland"}); });
     const auto WIKIBUTTON = (QPushButton*)findByName("openWikiButton");
-    QObject::connect(WIKIBUTTON, &QPushButton::clicked, [] {
-        QDesktopServices::openUrl(QString{"https://wiki.hyprland.org/Configuring/Configuring-Hyprland/"});
-    });
+    QObject::connect(WIKIBUTTON, &QPushButton::clicked, [] { QDesktopServices::openUrl(QString{"https://wiki.hyprland.org/Configuring/Configuring-Hyprland/"}); });
 
     const auto EXITBUTTON = (QPushButton*)findByName("exitButton");
-    QObject::connect(EXITBUTTON, &QPushButton::clicked, [] {
-        QApplication::exit(0);
-    });
+    QObject::connect(EXITBUTTON, &QPushButton::clicked, [] { QApplication::exit(0); });
 
     const auto TABS = (QTabWidget*)findByName("tabs");
-    QObject::connect(TABS->tabBar(), &QTabBar::currentChanged, [TABS, this] {
-        TABS->tabBar()->setCurrentIndex(this->currentTab);
-    });
+    QObject::connect(TABS->tabBar(), &QTabBar::currentChanged, [TABS, this] { TABS->tabBar()->setCurrentIndex(this->currentTab); });
 
     const auto TAB1NEXT = (QPushButton*)findByName("tab1Next");
     QObject::connect(TAB1NEXT, &QPushButton::clicked, [TABS, this] {
@@ -242,21 +172,15 @@ CHyprlandWelcome::CHyprlandWelcome(QWidget *parent)
     });
 
     const auto EXITDONTSHOW = (QPushButton*)findByName("dontShowAgain");
-    const auto FINISH = (QPushButton*)findByName("finishButton");
-    QObject::connect(EXITDONTSHOW, &QPushButton::clicked, [this] {
-        this->exitDontShowAgain();
-    });
-    QObject::connect(FINISH, &QPushButton::clicked, [this] {
-        this->exitDontShowAgain();
-    });
+    const auto FINISH       = (QPushButton*)findByName("finishButton");
+    QObject::connect(EXITDONTSHOW, &QPushButton::clicked, [this] { this->exitDontShowAgain(); });
+    QObject::connect(FINISH, &QPushButton::clicked, [this] { this->exitDontShowAgain(); });
 
     TABS->tabBar()->setCurrentIndex(this->currentTab);
 
     startAppTimer();
 }
 
-CHyprlandWelcome::~CHyprlandWelcome()
-{
+CHyprlandWelcome::~CHyprlandWelcome() {
     delete ui;
 }
-
