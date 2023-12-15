@@ -38,12 +38,19 @@ bool binExists(std::string path) {
     return ret.find("no") == std::string::npos;
 }
 
+bool appIsRunning(std::string binName) {
+    std::string ret = execAndGet("pidof " + binName);
+    return !ret.empty();
+}
+
 struct SAppCheck {
     std::vector<std::string> binaryNames;
     std::vector<std::string> binaryPaths;
     std::string              name;
     QLabel*                  label    = nullptr;
-    bool                     needsAll = false;
+    bool                     needsAllInstalled = false;
+    bool                     needsAllRunning = false;
+    std::vector<std::string> runningNames;
 };
 
 std::vector<SAppCheck> appChecks;
@@ -51,17 +58,17 @@ std::vector<SAppCheck> appChecks;
 //
 void CHyprlandWelcome::startAppTimer() {
 
-    appChecks.push_back(SAppCheck{{"waybar", "ags", "eww"}, {}, "Status Bar", (QLabel*)findByName("INSTALL_BAR")});
+    appChecks.push_back(SAppCheck{{"waybar", "ags", "eww"}, {}, "Status Bar", (QLabel*)findByName("INSTALL_BAR"), false, false, {"waybar", "gjs", "eww-daemon", "eww"}});
     appChecks.push_back(SAppCheck{{"dolphin", "thunar", "ranger"}, {}, "File Manager", (QLabel*)findByName("INSTALL_FM")});
     appChecks.push_back(SAppCheck{{"mako", "dunst"}, {}, "Notification Daemon", (QLabel*)findByName("INSTALL_NOTIF")});
     appChecks.push_back(SAppCheck{{"anyrun", "fuzzel", "wofi", "tofi"}, {}, "App Launcher", (QLabel*)findByName("INSTALL_LAUNCHER")});
     appChecks.push_back(SAppCheck{{"hyprpaper", "swaybg", "swww"}, {}, "Wallpaper Utility", (QLabel*)findByName("INSTALL_WALLPAPER")});
-    appChecks.push_back(SAppCheck{{"pipewire", "wireplumber"}, {}, "Pipewire*", (QLabel*)findByName("INSTALL_PW"), true});
+    appChecks.push_back(SAppCheck{{"pipewire", "wireplumber"}, {}, "Pipewire*", (QLabel*)findByName("INSTALL_PW"), true, true});
     appChecks.push_back(SAppCheck{{"xdg-desktop-portal", "xdg-desktop-portal-hyprland", "xdg-desktop-portal-gtk"},
                                   {"/usr/lib/xdg-desktop-portal", "/usr/lib/xdg-desktop-portal-hyprland", "/usr/lib/xdg-desktop-portal-gtk", "/usr/libexec/xdg-desktop-portal",
                                    "/usr/libexec/xdg-desktop-portal-hyprland", "/usr/libexec/xdg-desktop-portal-gtk"},
                                   "XDG Desktop Portal*",
-                                  (QLabel*)findByName("INSTALL_XDP")});
+                                  (QLabel*)findByName("INSTALL_XDP"), false, true, {"xdg-desktop-portal", "xdg-desktop-portal-hyprland"}});
     appChecks.push_back(SAppCheck{{}, {"/usr/lib/polkit-kde-authentication-agent-1"}, "Authentication Agent", (QLabel*)findByName("INSTALL_AUTH")});
     appChecks.push_back(SAppCheck{{"qtwaylandscanner"}, {}, "QT Wayland Support", (QLabel*)findByName("INSTALL_QTW")});
     appChecks.push_back(SAppCheck{{"kitty", "wezterm", "alacritty", "foot", "konsole", "gnome-terminal"}, {}, "Terminal", (QLabel*)findByName("INSTALL_TERM")});
@@ -74,20 +81,44 @@ void CHyprlandWelcome::startAppTimer() {
 
         for (const auto& app : appChecks) {
             std::vector<std::string> found;
+            std::vector<std::string> runningApps;
+            bool running = false;
             for (const auto& bin : app.binaryNames) {
                 if (appExists(bin))
                     found.push_back(bin);
+
+                if (app.runningNames.empty() && appIsRunning(bin)) {
+                    runningApps.push_back(bin);
+                    running = true;
+                }
             }
+            if (!app.runningNames.empty()) for (const auto& bin : app.runningNames) {
+                if (appIsRunning(bin)) {
+                    runningApps.push_back(bin);
+                    running = true;
+                }
+            }
+
             for (const auto& bin : app.binaryPaths) {
                 if (binExists(bin))
                     found.push_back(bin);
             }
 
-            if (found.empty() || (app.needsAll && found.size() != app.binaryNames.size() + app.binaryPaths.size())) {
+            if (found.empty() || (app.needsAllInstalled && found.size() != app.binaryNames.size() + app.binaryPaths.size())) {
                 app.label->setText(QString::fromStdString("<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + "</p></body></html>"));
-            } else {
+            } else if (app.needsAllRunning && runningApps.size() != (app.runningNames.empty() ? app.binaryNames : app.runningNames).size()) {
+                app.label->setText(QString::fromStdString("<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + ": Found all, but not running.</p></body></html>"));
+            } else if (!running) {
                 std::string text = "<html><head/><body><p><span style=\" color:#00ff00;\">✔️</span> " + app.name + ": <span style=\" color:#00ff00;\">found</span> ";
                 for (auto& f : found)
+                    text += f + ", ";
+                text.pop_back();
+                text.pop_back();
+                text += "</p></body></html>";
+                app.label->setText(QString::fromStdString(text));
+            } else {
+                std::string text = "<html><head/><body><p><span style=\" color:#00ffff;\">✔️</span> " + app.name + ": <span style=\" color:#00ffff;\">running</span> ";
+                for (auto& f : runningApps)
                     text += f + ", ";
                 text.pop_back();
                 text.pop_back();
@@ -147,16 +178,29 @@ CHyprlandWelcome::CHyprlandWelcome(QWidget* parent) : QMainWindow(parent), ui(ne
         this->currentTab = 1;
         TABS->tabBar()->setCurrentIndex(this->currentTab);
     });
-
     const auto TAB2NEXT = (QPushButton*)findByName("tab2Next");
     QObject::connect(TAB2NEXT, &QPushButton::clicked, [TABS, this] {
         this->currentTab = 2;
         TABS->tabBar()->setCurrentIndex(this->currentTab);
     });
-
     const auto TAB3NEXT = (QPushButton*)findByName("tab3Next");
     QObject::connect(TAB3NEXT, &QPushButton::clicked, [TABS, this] {
         this->currentTab = 3;
+        TABS->tabBar()->setCurrentIndex(this->currentTab);
+    });
+    const auto TAB2BACK = (QPushButton*)findByName("tab2Back");
+    QObject::connect(TAB2BACK, &QPushButton::clicked, [TABS, this] {
+        this->currentTab = 0;
+        TABS->tabBar()->setCurrentIndex(this->currentTab);
+    });
+    const auto TAB3BACK = (QPushButton*)findByName("tab3Back");
+    QObject::connect(TAB3BACK, &QPushButton::clicked, [TABS, this] {
+        this->currentTab = 1;
+        TABS->tabBar()->setCurrentIndex(this->currentTab);
+    });
+    const auto TAB4BACK = (QPushButton*)findByName("tab4Back");
+    QObject::connect(TAB4BACK, &QPushButton::clicked, [TABS, this] {
+        this->currentTab = 2;
         TABS->tabBar()->setCurrentIndex(this->currentTab);
     });
 
