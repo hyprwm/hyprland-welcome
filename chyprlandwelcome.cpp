@@ -69,7 +69,7 @@ void CHyprlandWelcome::startAppTimer() {
                                    "/usr/libexec/xdg-desktop-portal-hyprland", "/usr/libexec/xdg-desktop-portal-gtk"},
                                   "XDG Desktop Portal*",
                                   (QLabel*)findByName("INSTALL_XDP"), false, true, {"xdg-desktop-portal", "xdg-desktop-portal-hyprland"}});
-    appChecks.push_back(SAppCheck{{}, {"/usr/lib/polkit-kde-authentication-agent-1"}, "Authentication Agent", (QLabel*)findByName("INSTALL_AUTH")});
+    appChecks.push_back(SAppCheck{{}, {"/usr/lib/polkit-kde-authentication-agent-1"}, "Authentication Agent", (QLabel*)findByName("INSTALL_AUTH"), false, false, {"polkit-kde-authentication-agent-1"}});
     appChecks.push_back(SAppCheck{{"qtwaylandscanner"}, {}, "QT Wayland Support", (QLabel*)findByName("INSTALL_QTW")});
     appChecks.push_back(SAppCheck{{"kitty", "wezterm", "alacritty", "foot", "konsole", "gnome-terminal"}, {}, "Terminal", (QLabel*)findByName("INSTALL_TERM")});
     appChecks.push_back(SAppCheck{{"qt5ct", "qt6ct"}, {}, "QT Theming", (QLabel*)findByName("INSTALL_QTTHEME")});
@@ -104,7 +104,7 @@ void CHyprlandWelcome::startAppTimer() {
                     found.push_back(bin);
             }
 
-            if (found.empty() || (app.needsAllInstalled && found.size() != app.binaryNames.size() + app.binaryPaths.size())) {
+            if ((found.empty() && !running) || (app.needsAllInstalled && found.size() != app.binaryNames.size() + app.binaryPaths.size())) {
                 app.label->setText(QString::fromStdString("<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + "</p></body></html>"));
             } else if (app.needsAllRunning && runningApps.size() != (app.runningNames.empty() ? app.binaryNames : app.runningNames).size()) {
                 app.label->setText(QString::fromStdString("<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + ": Found all, but not running.</p></body></html>"));
