@@ -76,7 +76,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <property name="usesScrollButtons">
      <bool>false</bool>
@@ -639,8 +639,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>774</width>
-            <height>308</height>
+            <width>760</width>
+            <height>326</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -674,7 +674,7 @@
               </size>
              </property>
              <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Now it's time to configure the apps you've installed.&lt;/p&gt;&lt;p&gt;Status bars, wallpaper utilities might require their own configs. See their github pages / wikis to gain info on how to.&lt;/p&gt;&lt;p&gt;Open the config located at ~/.config/hypr/hyprland.conf and edit:&lt;/p&gt;&lt;p&gt;At the top, add exec-once = name for your autostart apps &lt;span style=&quot; font-style:italic;&quot;&gt;(e.g. exec-once = hyprpaper)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;You need to autostart your notification daemon, wallpaper utility, authentication agent and status bar.&lt;/p&gt;&lt;p&gt;A bit below that, find the default variables (e.g. $terminal) and edit them to your choices.&lt;/p&gt;&lt;p&gt;Further down, you'll see them used in bind = commands. You can edit those binds to your likings.&lt;/p&gt;&lt;p&gt;That's it! Your basic configuration is done. Head onto &lt;a href=&quot;https://wiki.hyprland.org/Configuring/Configuring-Hyprland/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#8ab4f8;&quot;&gt;the wiki&lt;/span&gt;&lt;/a&gt; to learn more about how to properly configure Hyprland. &lt;span style=&quot; font-style:italic;&quot;&gt;(this link might not open, in which case use the big button or manually go to https://wiki.hyprland.org/)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Now it's time to configure the apps you've installed.&lt;/p&gt;&lt;p&gt;Status bars, wallpaper utilities might require their own configs. See their github pages / wikis to gain info on how to.&lt;/p&gt;&lt;p&gt;Open the config located at ~/.config/hypr/hyprland.conf and edit:&lt;/p&gt;&lt;p&gt;At the top, add exec-once = name for your autostart apps &lt;span style=&quot; font-style:italic;&quot;&gt;(e.g. exec-once = hyprpaper)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;You need to autostart your notification daemon, wallpaper utility, authentication agent and status bar.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;please note the recommended KDE authentication agent is usually installed to a directory outside $PATH, so you need to put its full path. For most distros, it's /usr/lib/polkit-kde-authentication-agent-1 or /usr/libexec/polkit-kde-authentication-agent-1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;A bit below that, find the default variables (e.g. $terminal) and edit them to your choices.&lt;/p&gt;&lt;p&gt;Further down, you'll see them used in bind = commands. You can edit those binds to your likings.&lt;/p&gt;&lt;p&gt;That's it! Your basic configuration is done. Head onto &lt;a href=&quot;https://wiki.hyprland.org/Configuring/Configuring-Hyprland/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#8ab4f8;&quot;&gt;the wiki&lt;/span&gt;&lt;/a&gt; to learn more about how to properly configure Hyprland. &lt;span style=&quot; font-style:italic;&quot;&gt;(this link might not open, in which case use the big button or manually go to https://wiki.hyprland.org/)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="wordWrap">
               <bool>true</bool>
