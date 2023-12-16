@@ -38,7 +38,7 @@ else()
     else()
         add_executable(HyprlandWelcome
             ${PROJECT_SOURCES}
-            Logo.qrc
+            assets/Logo.qrc
         )
     endif()
 endif()

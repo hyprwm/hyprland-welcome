@@ -29,14 +29,10 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>CHyprlandWelcome</string>
-  </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>../../Documents/Hypr/try3finaltransparent.png</normaloff>../../Documents/Hypr/try3finaltransparent.png</iconset>
+   <string>Welcome to Hyprland!</string>
   </property>
   <property name="windowOpacity">
-   <double>0.900000000000000</double>
+   <double>1.000000000000000</double>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -55,7 +51,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="Logo.qrc">:/assets/assets/logobanner.png</pixmap>
+     <pixmap>:/logobanner.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -80,7 +76,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <property name="usesScrollButtons">
      <bool>false</bool>
@@ -164,185 +160,6 @@
      <attribute name="title">
       <string>Getting Started</string>
      </attribute>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>751</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The first thing we'll need to do is get some packages installed that you absolutely need in order for your system to be working properly.&lt;/p&gt;&lt;p&gt;Apps with * are absolutely necessary. All other are &lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;highly&lt;/span&gt; recommended, as they provide core parts of a working environment.&lt;/p&gt;&lt;p&gt;You &lt;span style=&quot; font-style:italic;&quot;&gt;can &lt;/span&gt;proceed without any of those, but it's not advised. There is a possibility that this app is unable to detect some of your installed binaries. In that case, it's okay to ignore them.&lt;/p&gt;&lt;p&gt;Use the &amp;quot;launch terminal&amp;quot; button to launch a terminal. Supported terminals are kitty, alacritty, foot, wezterm, konsole, gnome-terminal, xterm. If none are installed, you'll need to exit hyprland and install one. Use SUPER+M to exit hyprland.&lt;br/&gt;&lt;br/&gt;Hover on the different components to see what options are accepted. &lt;span style=&quot; color:#00ff00;&quot;&gt;Green&lt;/span&gt; means the component is found to be installed, &lt;span style=&quot; color:#00ffff;&quot;&gt;blue&lt;/span&gt; means it's running.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-      </property>
-      <property name="wordWrap">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_TERM">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>180</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: kitty, alacritty, wezterm, foot, konsole, gnome-terminal. Worth noting this is not a comprehensive list and Hyprland will work with any wayland-compatible terminal emulator, however this app will not automatically detect it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Terminal&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_FM">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>200</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: dolphin, ranger, thunar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; File Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_WALLPAPER">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>220</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: hyprpaper, swaybg, swww, wpaperd. Recommended: hyprpaper&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Wallpaper Utility&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_PW">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>240</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: pipewire &lt;span style=&quot; font-weight:700;&quot;&gt;and&lt;/span&gt; wireplumber&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Pipewire*&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_XDP">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>180</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: xdg-desktop-portal &lt;span style=&quot; font-weight:700;&quot;&gt;and&lt;/span&gt; xdg-desktop-portal-hyprland. Recommended to also install xdg-desktop-portal-gtk for a file picker.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; XDG Desktop Portal*&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_AUTH">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>200</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: &lt;span style=&quot; font-family:'monospace';&quot;&gt;kde-authentication-agent&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Authentication Agent&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_QTW">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>220</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: qt5-wayland, qt6-wayland (highly recommended both)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; QT Wayland support&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_NOTIF">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>280</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: dunst, mako. Worth noting you can also create your own notification daemons with stuff like ags or eww.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Notification Daemon&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_BAR">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>260</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: waybar, eww, ags&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Status Bar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="INSTALL_LAUNCHER">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>260</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: fuzzel, wofi, anyrun, tofi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; App Launcher&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="tab2Next">
       <property name="geometry">
        <rect>
@@ -375,22 +192,6 @@
        <string>Open Terminal</string>
       </property>
      </widget>
-     <widget class="QLabel" name="INSTALL_QTTHEME">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>240</y>
-        <width>301</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: qt5ct, qt6ct.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; QT Theming&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="tab2Back">
       <property name="geometry">
        <rect>
@@ -406,6 +207,248 @@
       <property name="text">
        <string>Back</string>
       </property>
+     </widget>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>775</width>
+        <height>313</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="toolTipDuration">
+       <number>-2</number>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <property name="lineWidth">
+       <number>0</number>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>769</width>
+         <height>315</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="GettingStartedText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>760</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The first thing we'll need to do is get some packages installed that you absolutely need in order for your system to be working properly.&lt;/p&gt;&lt;p&gt;Apps with * are absolutely necessary. All other are &lt;span style=&quot; font-weight:700; font-style:italic;&quot;&gt;highly&lt;/span&gt; recommended, as they provide core parts of a working environment.&lt;/p&gt;&lt;p&gt;You &lt;span style=&quot; font-style:italic;&quot;&gt;can &lt;/span&gt;proceed without any of those, but it's not advised. There is a possibility that this app is unable to detect some of your installed binaries. In that case, it's okay to ignore them. Nix users might have the issue.&lt;/p&gt;&lt;p&gt;Use the &amp;quot;launch terminal&amp;quot; button to launch a terminal. Use SUPER+M to exit hyprland. Supported terminals: kitty, alacritty, foot, wezterm, konsole, gnome-terminal, xterm.&lt;br/&gt;&lt;br/&gt;Hover on the different components to see what options are accepted. &lt;span style=&quot; color:#00ff00;&quot;&gt;Green&lt;/span&gt; means the component is found to be installed, &lt;span style=&quot; color:#00ffff;&quot;&gt;blue&lt;/span&gt; means it's running.&lt;/p&gt;&lt;p&gt;This list refreshes automatically.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::RichText</enum>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="margin">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="Components" columnminimumwidth="155,155">
+          <property name="leftMargin">
+           <number>40</number>
+          </property>
+          <property name="rightMargin">
+           <number>40</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="horizontalSpacing">
+           <number>10</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
+          <item row="1" column="1">
+           <widget class="QLabel" name="INSTALL_AUTH">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: &lt;span style=&quot; font-family:'monospace';&quot;&gt;kde-authentication-agent&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Authentication Agent&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="INSTALL_QTW">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: qt5-wayland, qt6-wayland (highly recommended both)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; QT Wayland support&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="INSTALL_FM">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: dolphin, ranger, thunar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; File Manager&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="INSTALL_TERM">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: kitty, alacritty, wezterm, foot, konsole, gnome-terminal. Worth noting this is not a comprehensive list and Hyprland will work with any wayland-compatible terminal emulator, however this app will not automatically detect it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Terminal&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="INSTALL_PW">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: pipewire &lt;span style=&quot; font-weight:700;&quot;&gt;and&lt;/span&gt; wireplumber&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Pipewire*&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="INSTALL_WALLPAPER">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: hyprpaper, swaybg, swww, wpaperd. Recommended: hyprpaper&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Wallpaper Utility&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="INSTALL_XDP">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: xdg-desktop-portal &lt;span style=&quot; font-weight:700;&quot;&gt;and&lt;/span&gt; xdg-desktop-portal-hyprland. Recommended to also install xdg-desktop-portal-gtk for a file picker.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; XDG Desktop Portal*&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="INSTALL_QTTHEME">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: qt5ct, qt6ct.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; QT Theming&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="INSTALL_NOTIF">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: dunst, mako. Worth noting you can also create your own notification daemons with stuff like ags or eww.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Notification Daemon&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="INSTALL_BAR">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: waybar, eww, ags&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; Status Bar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="INSTALL_LAUNCHER">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Accepted: fuzzel, wofi, anyrun, tofi&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;❌&lt;/span&gt; App Launcher&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="configuringTab">
@@ -713,8 +756,6 @@
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="Logo.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

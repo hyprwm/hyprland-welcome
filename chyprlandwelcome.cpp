@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QProcess>
 #include <filesystem>
+#include <thread>
 
 QWidget* findByName(QString name) {
     QList<QWidget*>           widgets = QApplication::allWidgets();
@@ -47,10 +48,12 @@ struct SAppCheck {
     std::vector<std::string> binaryNames;
     std::vector<std::string> binaryPaths;
     std::string              name;
-    QLabel*                  label    = nullptr;
+    QLabel*                  label             = nullptr;
     bool                     needsAllInstalled = false;
-    bool                     needsAllRunning = false;
+    bool                     needsAllRunning   = false;
     std::vector<std::string> runningNames;
+
+    std::string              currentText = "";
 };
 
 std::vector<SAppCheck> appChecks;
@@ -68,8 +71,12 @@ void CHyprlandWelcome::startAppTimer() {
                                   {"/usr/lib/xdg-desktop-portal", "/usr/lib/xdg-desktop-portal-hyprland", "/usr/lib/xdg-desktop-portal-gtk", "/usr/libexec/xdg-desktop-portal",
                                    "/usr/libexec/xdg-desktop-portal-hyprland", "/usr/libexec/xdg-desktop-portal-gtk"},
                                   "XDG Desktop Portal*",
-                                  (QLabel*)findByName("INSTALL_XDP"), false, true, {"xdg-desktop-portal", "xdg-desktop-portal-hyprland"}});
-    appChecks.push_back(SAppCheck{{}, {"/usr/lib/polkit-kde-authentication-agent-1"}, "Authentication Agent", (QLabel*)findByName("INSTALL_AUTH"), false, false, {"polkit-kde-authentication-agent-1"}});
+                                  (QLabel*)findByName("INSTALL_XDP"),
+                                  false,
+                                  true,
+                                  {"xdg-desktop-portal", "xdg-desktop-portal-hyprland"}});
+    appChecks.push_back(SAppCheck{
+        {}, {"/usr/lib/polkit-kde-authentication-agent-1"}, "Authentication Agent", (QLabel*)findByName("INSTALL_AUTH"), false, false, {"polkit-kde-authentication-agent-1"}});
     appChecks.push_back(SAppCheck{{"qtwaylandscanner"}, {}, "QT Wayland Support", (QLabel*)findByName("INSTALL_QTW")});
     appChecks.push_back(SAppCheck{{"kitty", "wezterm", "alacritty", "foot", "konsole", "gnome-terminal"}, {}, "Terminal", (QLabel*)findByName("INSTALL_TERM")});
     appChecks.push_back(SAppCheck{{"qt5ct", "qt6ct"}, {}, "QT Theming", (QLabel*)findByName("INSTALL_QTTHEME")});
@@ -79,55 +86,90 @@ void CHyprlandWelcome::startAppTimer() {
         if (this->currentTab != 1)
             return;
 
+        appScanMutex.lock();
+
         for (const auto& app : appChecks) {
-            std::vector<std::string> found;
-            std::vector<std::string> runningApps;
-            bool running = false;
-            for (const auto& bin : app.binaryNames) {
-                if (appExists(bin))
-                    found.push_back(bin);
-
-                if (app.runningNames.empty() && appIsRunning(bin)) {
-                    runningApps.push_back(bin);
-                    running = true;
-                }
-            }
-            if (!app.runningNames.empty()) for (const auto& bin : app.runningNames) {
-                if (appIsRunning(bin)) {
-                    runningApps.push_back(bin);
-                    running = true;
-                }
-            }
-
-            for (const auto& bin : app.binaryPaths) {
-                if (binExists(bin))
-                    found.push_back(bin);
-            }
-
-            if ((found.empty() && !running) || (app.needsAllInstalled && found.size() != app.binaryNames.size() + app.binaryPaths.size())) {
-                app.label->setText(QString::fromStdString("<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + "</p></body></html>"));
-            } else if (app.needsAllRunning && runningApps.size() != (app.runningNames.empty() ? app.binaryNames : app.runningNames).size()) {
-                app.label->setText(QString::fromStdString("<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + ": Found all, but not running.</p></body></html>"));
-            } else if (!running) {
-                std::string text = "<html><head/><body><p><span style=\" color:#00ff00;\">✔️</span> " + app.name + ": <span style=\" color:#00ff00;\">found</span> ";
-                for (auto& f : found)
-                    text += f + ", ";
-                text.pop_back();
-                text.pop_back();
-                text += "</p></body></html>";
-                app.label->setText(QString::fromStdString(text));
-            } else {
-                std::string text = "<html><head/><body><p><span style=\" color:#00ffff;\">✔️</span> " + app.name + ": <span style=\" color:#00ffff;\">running</span> ";
-                for (auto& f : runningApps)
-                    text += f + ", ";
-                text.pop_back();
-                text.pop_back();
-                text += "</p></body></html>";
-                app.label->setText(QString::fromStdString(text));
-            }
+            if (app.currentText.empty())
+                continue;
+            app.label->setText(QString::fromStdString(app.currentText));
         }
+
+        appScanMutex.unlock();
     });
     timer->start(1000);
+
+    std::thread t([this]() {
+        while (true) {
+
+            if (exit)
+                return;
+
+            if (currentTab != 1) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(500));
+                continue;
+            }
+
+            for (auto& app : appChecks) {
+                std::vector<std::string> found;
+                std::vector<std::string> runningApps;
+                bool                     running = false;
+                for (const auto& bin : app.binaryNames) {
+                    if (appExists(bin))
+                        found.push_back(bin);
+
+                    if (app.runningNames.empty() && appIsRunning(bin)) {
+                        runningApps.push_back(bin);
+                        running = true;
+                    }
+                }
+                if (!app.runningNames.empty())
+                    for (const auto& bin : app.runningNames) {
+                        if (appIsRunning(bin)) {
+                            runningApps.push_back(bin);
+                            running = true;
+                        }
+                    }
+
+                for (const auto& bin : app.binaryPaths) {
+                    if (binExists(bin))
+                        found.push_back(bin);
+                }
+
+                if ((found.empty() && !running) || (app.needsAllInstalled && found.size() != app.binaryNames.size() + app.binaryPaths.size())) {
+                    appScanMutex.lock();
+                    app.currentText = "<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + "</p></body></html>";
+                    appScanMutex.unlock();
+                } else if (app.needsAllRunning && runningApps.size() != (app.runningNames.empty() ? app.binaryNames : app.runningNames).size()) {
+                    appScanMutex.lock();
+                    app.currentText = "<html><head/><body><p><span style=\" color:#ff0000;\">❌</span> " + app.name + ": Found all, but not running.</p></body></html>";
+                    appScanMutex.unlock();
+                } else if (!running) {
+                    std::string text = "<html><head/><body><p><span style=\" color:#00ff00;\">✔️</span> " + app.name + ": <span style=\" color:#00ff00;\">found</span> ";
+                    for (auto& f : found)
+                        text += f + ", ";
+                    text.pop_back();
+                    text.pop_back();
+                    text += "</p></body></html>";
+                    appScanMutex.lock();
+                    app.currentText = text;
+                    appScanMutex.unlock();
+                } else {
+                    std::string text = "<html><head/><body><p><span style=\" color:#00ffff;\">✔️</span> " + app.name + ": <span style=\" color:#00ffff;\">running</span> ";
+                    for (auto& f : runningApps)
+                        text += f + ", ";
+                    text.pop_back();
+                    text.pop_back();
+                    text += "</p></body></html>";
+                    appScanMutex.lock();
+                    app.currentText = text;
+                    appScanMutex.unlock();
+                }
+            }
+
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+    });
+    t.detach();
 }
 
 std::string getDataStatePath() {
@@ -145,6 +187,7 @@ std::string getDataStatePath() {
 void CHyprlandWelcome::exitDontShowAgain() {
     const auto STATEPATH = getDataStatePath();
     if (STATEPATH.empty()) {
+        exit = true;
         QApplication::exit(0);
         return;
     }
@@ -155,6 +198,7 @@ void CHyprlandWelcome::exitDontShowAgain() {
         std::filesystem::create_directories(STATEPATH);
 
     execAndGet("echo \"noshow\" > " + CONFPATH);
+    exit = true;
     QApplication::exit(0);
 }
 
@@ -168,7 +212,10 @@ CHyprlandWelcome::CHyprlandWelcome(QWidget* parent) : QMainWindow(parent), ui(ne
     QObject::connect(WIKIBUTTON, &QPushButton::clicked, [] { QDesktopServices::openUrl(QString{"https://wiki.hyprland.org/Configuring/Configuring-Hyprland/"}); });
 
     const auto EXITBUTTON = (QPushButton*)findByName("exitButton");
-    QObject::connect(EXITBUTTON, &QPushButton::clicked, [] { QApplication::exit(0); });
+    QObject::connect(EXITBUTTON, &QPushButton::clicked, [this] {
+        exit = true;
+        QApplication::exit(0);
+    });
 
     const auto TABS = (QTabWidget*)findByName("tabs");
     QObject::connect(TABS->tabBar(), &QTabBar::currentChanged, [TABS, this] { TABS->tabBar()->setCurrentIndex(this->currentTab); });
