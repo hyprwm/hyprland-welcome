@@ -76,7 +76,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <property name="usesScrollButtons">
      <bool>false</bool>
@@ -107,7 +107,7 @@
        <item>
         <widget class="QScrollArea" name="scrollArea_2">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -130,7 +130,7 @@
             <x>0</x>
             <y>0</y>
             <width>774</width>
-            <height>312</height>
+            <height>308</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
@@ -218,8 +218,14 @@
          <property name="leftMargin">
           <number>5</number>
          </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
          <property name="rightMargin">
           <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
          </property>
          <item>
           <spacer name="horizontalSpacer">
@@ -275,7 +281,7 @@
        <item>
         <widget class="QScrollArea" name="scrollArea">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -522,8 +528,14 @@
          <property name="leftMargin">
           <number>5</number>
          </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
          <property name="rightMargin">
           <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
          </property>
          <item>
           <widget class="QPushButton" name="tab2Back">
@@ -605,7 +617,7 @@
        <item>
         <widget class="QScrollArea" name="scrollArea_4">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -628,7 +640,7 @@
             <x>0</x>
             <y>0</y>
             <width>774</width>
-            <height>312</height>
+            <height>308</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -694,8 +706,14 @@
          <property name="leftMargin">
           <number>5</number>
          </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
          <property name="rightMargin">
           <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
          </property>
          <item>
           <widget class="QPushButton" name="tab3Back">
@@ -796,7 +814,7 @@
        <item>
         <widget class="QScrollArea" name="scrollArea_5">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -818,8 +836,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>776</width>
-            <height>312</height>
+            <width>774</width>
+            <height>308</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -885,8 +903,14 @@
          <property name="leftMargin">
           <number>5</number>
          </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
          <property name="rightMargin">
           <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>3</number>
          </property>
          <item>
           <widget class="QPushButton" name="tab4Back">
@@ -948,6 +972,12 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
     </property>
@@ -964,6 +994,12 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
     </property>
@@ -979,6 +1015,12 @@
       <width>81</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
