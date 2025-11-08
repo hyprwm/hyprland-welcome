@@ -81,8 +81,20 @@ If you prefer pre-configured settings, or "dotfiles", you can see the "preconfig
 
 constexpr const char* TAB4_CONTENT =
     R"#(That's it for this small introduction! Explore the wiki, and various apps, and enjoy your journey!
+
+Here are some important default shortcuts:
+• SUPER + Q <span foreground="#666666">=</span> Kitty
+• SUPER + E <span foreground="#666666">=</span> Dolphin
+• SUPER + C <span foreground="#666666">=</span> Close window
+• SUPER + V <span foreground="#666666">=</span> Toggle floating
+• SUPER + M <span foreground="#666666">=</span> Exit Hyprland
+• SUPER + [1 - 9] <span foreground="#666666">=</span> Workspaces 1 - 9
+• SUPER + SHIFT + [1 - 9] <span foreground="#666666">=</span> Move window to workspace 1 - 9
+• SUPER + Arrows <span foreground="#666666">=</span> Move focus around
+
+<i>You can easily change these in your hyprland.conf.</i>
     
-Thank you for choosing Hyprland!)#";
+Thank you for choosing Hyprland! ❤️)#";
 
 struct SAppState {
     std::string              name;
