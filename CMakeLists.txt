@@ -1,71 +1,60 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.19)
 
-project(HyprlandWelcome VERSION 0.1 LANGUAGES CXX)
+file(READ "${CMAKE_SOURCE_DIR}/VERSION" VER_RAW)
+string(STRIP ${VER_RAW} HYPRLAND_WELCOME_VERSION)
 
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
+add_compile_definitions(HYPRLAND_WELCOME_VERSION="${HYPRLAND_WELCOME_VERSION}")
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(
+  hyprland-welcome
+  VERSION ${HYPRLAND_WELCOME_VERSION}
+  DESCRIPTION "Volume management center for Hyprland")
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
-
-set(PROJECT_SOURCES
-        main.cpp
-        chyprlandwelcome.cpp
-        chyprlandwelcome.h
-        chyprlandwelcome.ui
-)
-
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(HyprlandWelcome
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET HyprlandWelcome APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(HyprlandWelcome SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(HyprlandWelcome
-            ${PROJECT_SOURCES}
-            assets/Logo.qrc
-        )
-    endif()
-endif()
-
-target_link_libraries(HyprlandWelcome PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.HyprlandWelcome)
-endif()
-set_target_properties(HyprlandWelcome PROPERTIES
-    ${BUNDLE_ID_OPTION}
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
-
+include(CTest)
+include(CheckIncludeFile)
 include(GNUInstallDirs)
-install(TARGETS HyprlandWelcome
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+
+set(PREFIX ${CMAKE_INSTALL_PREFIX})
+set(INCLUDE ${CMAKE_INSTALL_FULL_INCLUDEDIR})
+set(LIBDIR ${CMAKE_INSTALL_FULL_LIBDIR})
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(
+  deps
+  REQUIRED
+  IMPORTED_TARGET
+  hyprtoolkit
+  pixman-1
+  libdrm
+  hyprutils
 )
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(HyprlandWelcome)
+set(CMAKE_CXX_STANDARD 23)
+add_compile_options(
+  -Wall
+  -Wextra
+  -Wno-unused-parameter
+  -Wno-unused-value
+  -Wno-missing-field-initializers
+  -Wpedantic)
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
+if(CMAKE_BUILD_TYPE MATCHES Debug OR CMAKE_BUILD_TYPE MATCHES DEBUG)
+  message(STATUS "Configuring hyprland-welcome in Debug")
+  add_compile_definitions(hyprland-welcome_DEBUG)
+else()
+  add_compile_options(-O3)
+  message(STATUS "Configuring hyprland-welcome in Release")
 endif()
+
+file(GLOB_RECURSE SRCFILES CONFIGURE_DEPENDS "src/*.cpp" "include/*.hpp")
+
+add_executable(hyprland-welcome ${SRCFILES})
+
+target_link_libraries(hyprland-welcome PkgConfig::deps)
+
+install(
+  FILES contrib/hyprland-welcome.desktop
+  DESTINATION "share/applications")
+
+install(TARGETS hyprland-welcome)

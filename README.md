@@ -1,4 +1,4 @@
 # hyprland-welcome
-Hyprland's cute welcome app, written in qt6.
+Hyprland's cute welcome app, written with hyprtoolkit.
 
-![](https://raw.githubusercontent.com/hyprwm/hyprland-welcome/main/assets/preview.png)
+![](./assets/preview.png)
